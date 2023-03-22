@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
 const limiter = require('./middlewares/rateLimiter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const routeSignup = require('./routes/signup');
 const routeSignin = require('./routes/signin');
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(limiter);
+app.use(requestLogger);
 
 app.use('/', routeSignup);
 app.use('/', routeSignin);
@@ -41,6 +43,8 @@ app.use('/users', routeUsers);
 app.use('/cards', routeCards);
 
 app.use((req, res, next) => next(new NotFoundError('Страницы по запрошенному URL не существует')));
+
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
