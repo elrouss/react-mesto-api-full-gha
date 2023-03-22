@@ -1,0 +1,13 @@
+.page {
+  max-width: 880px;
+  width: 100%;
+  transition: transform .25s ease;
+}
+
+.page.active {
+  transform: translateY(142px);
+}
+
+.page.active > .header {
+  border-top: 1px solid rgba(84, 84, 84, .7);
+}
