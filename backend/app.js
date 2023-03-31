@@ -22,14 +22,13 @@ const errorHandler = require('./middlewares/errorHandler');
 const URL = 'mongodb://127.0.0.1:27017/mestodb';
 const { PORT = 3001 } = process.env;
 
-mongoose.set('strictQuery', true);
-mongoose.connect(URL);
-
 const app = express();
 
 app.use(cors());
-
 app.use(helmet());
+
+mongoose.set('strictQuery', true);
+mongoose.connect(URL);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
