@@ -36,7 +36,14 @@ export default function App() {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [isProcessLoading, setIsProcessLoading] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({
+    _id: '',
+    email: '',
+    name: '',
+    about: '',
+    avatar: ''
+  });
+
   const [userData, setUserData] = useState({
     _id: '',
     email: ''
@@ -60,16 +67,17 @@ export default function App() {
 
     if (jwt) {
       setIsAppLoading(true);
+
       getContent(jwt)
         .then((res) => {
-          const data = res.data;
+          const { _id, email } = res;
           const userData = {
-            _id: data._id,
-            email: data.email
+            _id,
+            email
           };
           setUserData(userData);
           handleLogin();
-          navigate('/react-mesto-auth', { replace: true });
+          navigate('/', { replace: true });
         })
         .catch((err) => {
           console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
@@ -152,7 +160,7 @@ export default function App() {
   }, [isImagePopupOpened]);
 
   function closePopupsOnOutsideClick(evt) {
-    const target = evt.target;
+    const { target } = evt;
     const checkSelector = selector => target.classList.contains(selector);
 
     if (checkSelector('popup_opened') || checkSelector('popup__closing-button')) {
@@ -192,7 +200,7 @@ export default function App() {
   useEffect(() => {
     if (isInfoTooltipOpened && isRegistrationSuccess) {
       setTimeout(() => {
-        navigate('react-mesto-auth/sign-in', { replace: false });
+        navigate('/signin', { replace: false });
         closeAllPopups();
       }, 1200);
 
@@ -264,7 +272,7 @@ export default function App() {
 
     api.addNewСard(data.name, data.link)
       .then((card) => {
-        setCards([card, ...cards]);
+        setCards([...cards, card]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -310,12 +318,15 @@ export default function App() {
   return (
     <div className={`page ${isActiveBurgerMenu && 'active'}`}>
       <Routes>
-        <Route path='react-mesto-auth/' element={
+        <Route path='/' element={
           <Header
             isActive={isActiveBurgerMenu}
             onActive={toggleBurgerMenu}
             userData={userData}
+            isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
+            setUserData={setUserData}
+            setCurrentUser={setCurrentUser}
             isActiveBurgerMenu={isActiveBurgerMenu}
             toggleBurgerMenu={toggleBurgerMenu}
           />
@@ -383,14 +394,14 @@ export default function App() {
               </>
             }
           />
-          <Route path='sign-in' element={
+          <Route path='signin' element={
             <Login
               onAuthorization={handleUserAuthorization}
               isProcessLoading={isProcessLoading}
             />
           }
           />
-          <Route path='sign-up' element={
+          <Route path='signup' element={
             <Register
               onRegistration={handleUserRegistration}
               isProcessLoading={isProcessLoading}

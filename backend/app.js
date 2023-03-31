@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { errors } = require('celebrate');
 
 const limiter = require('./middlewares/rateLimiter');
@@ -19,12 +20,14 @@ const NotFoundError = require('./errors/NotFoundError');
 const errorHandler = require('./middlewares/errorHandler');
 
 const URL = 'mongodb://localhost:27017/mestodb';
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 mongoose.set('strictQuery', true);
 mongoose.connect(URL);
 
 const app = express();
+
+app.use(cors());
 
 app.use(helmet());
 

@@ -10,7 +10,12 @@ function createCard(req, res, next) {
 
   Card
     .create({ name, link, owner: userId })
-    .then((card) => res.status(201).send({ data: card }))
+    .then((card) => {
+      card
+        .populate('owner')
+        .then(() => res.status(201).send(card))
+        .catch(next);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new InaccurateDataError('Переданы некорректные данные при создании карточки'));
@@ -24,7 +29,7 @@ function receiveCards(_, res, next) {
   Card
     .find({})
     .populate(['owner', 'likes'])
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 }
 
@@ -44,8 +49,9 @@ function likeCard(req, res, next) {
         new: true,
       },
     )
+    .populate(['owner', 'likes'])
     .then((card) => {
-      if (card) return res.send({ data: card });
+      if (card) return res.send(card);
 
       throw new NotFoundError('Карточка с указанным id не найдена');
     })
@@ -74,8 +80,9 @@ function dislikeCard(req, res, next) {
         new: true,
       },
     )
+    .populate(['owner', 'likes'])
     .then((card) => {
-      if (card) return res.send({ data: card });
+      if (card) return res.send(card);
 
       throw new NotFoundError('Данные по указанному id не найдены');
     })
@@ -104,7 +111,7 @@ function deleteCard(req, res, next) {
 
       card
         .remove()
-        .then(() => res.send({ data: card }))
+        .then(() => res.send(card))
         .catch(next);
     })
     .catch(next);

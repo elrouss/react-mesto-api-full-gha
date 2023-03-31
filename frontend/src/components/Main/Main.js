@@ -21,7 +21,7 @@ export default function Main(props) {
       </section>
       <section className="gallery" aria-label="Галерея карточек">
         {
-          props.cards.map((card) => (
+          props.cards.slice().reverse().map((card) => (
             <Card
               key={card._id}
               card={card}

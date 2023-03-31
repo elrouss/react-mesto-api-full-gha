@@ -1,4 +1,4 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'http://localhost:3001';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -30,7 +30,7 @@ export function authorizeUser(email, password) {
     .then(res => checkResponse(res))
     .then((data) => {
       if (data.token) {
-        const token = data.token;
+        const { token } = data;
         localStorage.setItem('jwt', token);
 
         return token;

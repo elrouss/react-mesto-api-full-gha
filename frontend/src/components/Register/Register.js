@@ -60,7 +60,7 @@ export default function Register({ onRegistration, isProcessLoading }) {
       </div>
 
       <p className="welcome-window__paragraph">Уже зарегистрированы?&nbsp;
-        <Link className='welcome-window__link' to='../sign-in'>Войти</Link>
+        <Link className='welcome-window__link' to='../signin'>Войти</Link>
       </p>
 
     </WelcomeWindowWithForm>
