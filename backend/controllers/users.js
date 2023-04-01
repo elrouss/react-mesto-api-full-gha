@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { SECRET_SIGNING_KEY } = require('../utils/constants');
+const { NODE_ENV, SECRET_SIGNING_KEY } = require('../utils/constants');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
@@ -57,7 +57,7 @@ function loginUser(req, res, next) {
       if (userId) {
         const token = jwt.sign(
           { userId },
-          process.env.NODE_ENV === 'production' ? SECRET_SIGNING_KEY : 'dev-secret',
+          NODE_ENV === 'production' ? SECRET_SIGNING_KEY : 'dev-secret',
           { expiresIn: '7d' },
         );
 
