@@ -1,6 +1,6 @@
 class Api {
   constructor() {
-    this._baseUrl = 'http://localhost:3001';
+    this._baseUrl = 'https://api.elrouss.mesto.nomoredomains.work/';
   };
 
   _request(url, options) {

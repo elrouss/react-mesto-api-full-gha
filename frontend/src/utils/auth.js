@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://api.elrouss.mesto.nomoredomains.work/';
 
 function checkResponse(res) {
   if (res.ok) {
