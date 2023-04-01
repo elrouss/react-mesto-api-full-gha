@@ -200,7 +200,7 @@ https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist_15
   </a>
 </details>
                                                                                                
-<details><summary><b><i>Страница 404</i></b> (<a href="#problem-routes"><b>не будет видна</b></a> на  Github Pages)</summary>
+<details><summary><b><i>Страница 404</i></b></summary>
   <a href="https://elrouss.mesto.nomoredomains.work">
     <img width="500" src="https://user-images.githubusercontent.com/108838349/215304244-bd854ae2-0066-416d-a516-3b29f4028363.gif">
   </a>
