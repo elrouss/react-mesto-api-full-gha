@@ -1,5 +1,5 @@
 const { NODE_ENV } = process.env;
-const { SECRET_SIGNING_KEY = 'U2FsdGVkX19nV2KreWqHk1BGD+ojOGgl39N93rtj1DVVSeYcdNPGnAQt4PtU2FvJrEiPtoQRACJ0B/yIORhjvQ==' } = process.env;
+const { SECRET_SIGNING_KEY } = process.env;
 
 const { MONGODB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
