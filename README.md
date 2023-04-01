@@ -33,7 +33,7 @@
 
 <b>Ссылки на проект:</b>
 <br>
-IP-адрес 158.160.52.24
+IP 158.160.52.24
 <br>
 Frontend https://elrouss.mesto.nomoredomains.work
 <br>
