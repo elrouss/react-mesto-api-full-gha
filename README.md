@@ -33,11 +33,11 @@
 
 <b>Ссылки на проект:</b>
 <br>
-IP-адрес: 158.160.52.24
+IP-адрес 158.160.52.24
 <br>
-Frontend: https://elrouss.mesto.nomoredomains.work
+Frontend https://elrouss.mesto.nomoredomains.work
 <br>
-Backend: https://api.elrouss.mesto.nomoredomains.work
+Backend https://api.elrouss.mesto.nomoredomains.work
 
 <b>Ссылки на макет:</b>
 <br>
