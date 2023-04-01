@@ -15,7 +15,7 @@ module.exports = (req, _, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, SECRET_SIGNING_KEY);
+    payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? SECRET_SIGNING_KEY : 'dev-secret');
   } catch (err) {
     return next(new UnauthorizedError('Неправильные почта или пароль'));
   }

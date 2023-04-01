@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -19,7 +21,8 @@ const routeCards = require('./routes/cards');
 const NotFoundError = require('./errors/NotFoundError');
 const errorHandler = require('./middlewares/errorHandler');
 
-const URL = 'mongodb://127.0.0.1:27017/mestodb';
+const { MONGODB_URL } = require('./utils/constants');
+
 const { PORT = 3001 } = process.env;
 
 const app = express();
@@ -28,7 +31,7 @@ app.use(cors());
 app.use(helmet());
 
 mongoose.set('strictQuery', true);
-mongoose.connect(URL);
+mongoose.connect(MONGODB_URL);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

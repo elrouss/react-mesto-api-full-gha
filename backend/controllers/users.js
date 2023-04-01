@@ -57,7 +57,7 @@ function loginUser(req, res, next) {
       if (userId) {
         const token = jwt.sign(
           { userId },
-          SECRET_SIGNING_KEY,
+          process.env.NODE_ENV === 'production' ? SECRET_SIGNING_KEY : 'dev-secret',
           { expiresIn: '7d' },
         );
 
