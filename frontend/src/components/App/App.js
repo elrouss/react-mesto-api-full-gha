@@ -224,6 +224,7 @@ export default function App() {
         };
       })
       .catch((err) => {
+        openInfoTooltip();
         console.log(`Ошибка в процессе авторизации пользователя на сайте: ${err}`);
       })
       .finally(() => {
