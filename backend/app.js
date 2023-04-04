@@ -23,7 +23,8 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const { MONGODB_URL } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
+// const { PORT = 3000 } = process.env; TODO
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
@@ -36,6 +37,8 @@ mongoose.connect(MONGODB_URL);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(requestLogger);
+
 app.use(limiter);
 
 app.get('/crash-test', () => {
@@ -43,8 +46,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадет');
   }, 0);
 });
-
-app.use(requestLogger);
 
 app.use('/', routeSignup);
 app.use('/', routeSignin);
