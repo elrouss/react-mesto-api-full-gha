@@ -16,8 +16,7 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const { MONGODB_URL } = require('./utils/constants');
 
-// const { PORT = 3000 } = process.env; TODO
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
